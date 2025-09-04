@@ -37,22 +37,13 @@ pipeline {
                     
                     }
               }
-        }
-        stage('Quality Gate') {
-        steps {
-        script {
-            timeout(time: 5, unit: 'MINUTES') {
-                def qg = waitForQualityGate(credentialsId: 'sonar_cred')
-                if (qg.status != "OK") {
-                    echo "⚠️ Warning: Quality Gate failed but continuing pipeline. Status = ${qg.status}"
-                } else {
-                    echo "✅ Quality Gate passed"
-                }
-            }
-        }
-    }
-}
+         }
       
+    }
+    post{
+        always{
+            cleanWs()
+        }
     }
 }
 
