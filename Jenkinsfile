@@ -40,15 +40,20 @@ pipeline {
          }
           stage('Build Docker Image') {
             steps {
-                sh 'docker build -t sreya:latest .'
+                script{
+                    withDockerRegistry(credentialsId: 'docker_cred') {
+                    sh 'docker build -t sreya:latest .'
+                   }
+                }
             }
         }
         stage('Run Docker Container') {
             steps {
+                script{
                 sh 'docker run -d -p 8780:8780 --name sreyaserver-app sreya:latest'
             }
         }
-      
+        }
     }
    
 }
