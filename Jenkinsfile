@@ -38,6 +38,16 @@ pipeline {
                     }
               }
          }
+          stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t sreya:latest .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run -d -p 8780:8780 --name sreyaserver-app sreya:latest'
+            }
+        }
       
     }
    
