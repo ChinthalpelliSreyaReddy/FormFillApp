@@ -6,6 +6,7 @@ pipeline {
     }
     environment{
         SCANNER_HOME= tool 'sonar-scanner'
+        DOCKER_HOST = "tcp://43.205.238.141:2375"
     }
 
     stages {
