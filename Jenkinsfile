@@ -38,7 +38,8 @@ pipeline {
                     }
               }
         }
-        teps {
+        stage('Quality Gate') {
+        steps {
         script {
             timeout(time: 1, unit: 'HOURS') {
                 def qg = waitForQualityGate(credentialsId: 'sonar_cred')
